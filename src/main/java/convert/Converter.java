@@ -34,90 +34,39 @@ public class Converter {
             Element student = doc.createElement("student");
             rootElement.appendChild(student);
 
-            Element studentId = doc.createElement("id");
-            studentId.appendChild(doc.createTextNode(studentIDInput));
-            student.appendChild(studentId);
-
-            Element studentName = doc.createElement("name");
-            studentName.appendChild(doc.createTextNode(studentNameInput));
-            student.appendChild(studentName);
-
-            Element surname = doc.createElement("surname");
-            surname.appendChild(doc.createTextNode(studentSurnameInput));
-            student.appendChild(surname);
+            createNewAttribute(doc, "id", studentIDInput, student);
+            createNewAttribute(doc, "name", studentNameInput, student);
+            createNewAttribute(doc, "surname", studentSurnameInput, student);
 
             //creating "study"chile of record
             Element study = doc.createElement("study");
             rootElement.appendChild(study);
 
-            Element studyId = doc.createElement("id");
-            studyId.appendChild(doc.createTextNode(studyIdInput));
-            study.appendChild(studyId);
-
-            Element fieldCode = doc.createElement("field_code");
-            fieldCode.appendChild(doc.createTextNode(studyFieldCodeInput));
-            study.appendChild(fieldCode);
-
-            Element field = doc.createElement("field");
-            field.appendChild(doc.createTextNode(studyFieldInput));
-            study.appendChild(field);
+            createNewAttribute(doc, "id", studyIdInput, study);
+            createNewAttribute(doc, "field_code", studyFieldCodeInput, study);
+            createNewAttribute(doc, "field", studyFieldInput, study);
 
             //creating "course" child of study
             Element course = doc.createElement("course");
             study.appendChild(course);
 
-            Element code = doc.createElement("code");
-            code.appendChild(doc.createTextNode(codeInput));
-            course.appendChild(code);
-
-            Element courseName = doc.createElement("name");
-            courseName.appendChild(doc.createTextNode(courseNameInput));
-            course.appendChild(courseName);
-
-            Element type = doc.createElement("type");
-            type.appendChild(doc.createTextNode(typeInput));
-            course.appendChild(type);
-
-            Element semester = doc.createElement("semester");
-            semester.appendChild(doc.createTextNode(semesterInput));
-            course.appendChild(semester);
-
-            Element ayear = doc.createElement("ayear");
-            ayear.appendChild(doc.createTextNode(ayearInput));
-            course.appendChild(ayear);
-
-            Element yearOfStudy = doc.createElement("year_of_study");
-            yearOfStudy.appendChild(doc.createTextNode(yearOfStudyInput));
-            course.appendChild(yearOfStudy);
+            createNewAttribute(doc, "code", codeInput, course);
+            createNewAttribute(doc, "name", courseNameInput, course);
+            createNewAttribute(doc, "type", typeInput, course);
+            createNewAttribute(doc, "semester", semesterInput, course);
+            createNewAttribute(doc, "ayear", ayearInput, course);
+            createNewAttribute(doc, "year_of_study", yearOfStudyInput, course);
 
             //creating "exam" child of course
             Element exam = doc.createElement("exam");
             course.appendChild(exam);
 
-            Element result = doc.createElement("result");
-            result.appendChild(doc.createTextNode(resultInput));
-            exam.appendChild(result);
-
-            Element date = doc.createElement("date");
-            date.appendChild(doc.createTextNode(dateInput));
-            exam.appendChild(date);
-
-            Element teacher = doc.createElement("teacher");
-            teacher.appendChild(doc.createTextNode(teacherInput));
-            exam.appendChild(teacher);
-
-            Element grade = doc.createElement("grade");
-            grade.appendChild(doc.createTextNode(gradeInput));
-            exam.appendChild(grade);
-
-            Element creditsReg = doc.createElement("credits_reg");
-            creditsReg.appendChild(doc.createTextNode(creditsRegInput));
-            exam.appendChild(creditsReg);
-
-            Element credits_obt = doc.createElement("credits_obt");
-            credits_obt.appendChild(doc.createTextNode(creditsObtInput));
-            exam.appendChild(credits_obt);
-
+            createNewAttribute(doc, "result", resultInput, exam);
+            createNewAttribute(doc, "date", dateInput, exam);
+            createNewAttribute(doc, "teacher", teacherInput, exam);
+            createNewAttribute(doc, "grade", gradeInput, exam);
+            createNewAttribute(doc, "credits_reg", creditsRegInput, exam);
+            createNewAttribute(doc, "credits_obt", creditsObtInput, exam);
 
             // write the content into xml file
             Transformer tf = TransformerFactory.newInstance().newTransformer();
@@ -133,4 +82,9 @@ public class Converter {
         }
     }
 
+    public static void createNewAttribute(Document doc, String name, String value, Element parentElement) {
+        Element studentId = doc.createElement(name);
+        studentId.appendChild(doc.createTextNode(value));
+        parentElement.appendChild(studentId);
+    }
 }
