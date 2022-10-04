@@ -4,7 +4,6 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 public class Import {
     static String pathCSV = "src/main/resources/input.csv";
 
-    public static List<String[]> InputCSV() {
+    public static List<String[]> inputCSV() {
         List<String[]> allData = new ArrayList<>();
         try {
             // Create an object of file reader class with CSV file as a parameter.
@@ -26,6 +25,7 @@ public class Import {
             // filereader and parser
             CSVReader csvReader = new CSVReaderBuilder(filereader)
                     .withCSVParser(parser)
+                    .withSkipLines(1)
                     .build();
 
             // Read all data at once
